@@ -25,9 +25,18 @@ const setNewPassword = (token, newPassword) => {
     }, corsHeaders);
 };
 
+const getLogs = () => {
+    return axios.get(API_URL + "api/v1/user/log", {
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`
+        }
+    });
+}
+
 const UserService = {
     setNewPassword,
-    changePassword
+    changePassword,
+    getLogs
 };
 
 export default UserService;

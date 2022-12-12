@@ -5,6 +5,7 @@ import React from "react";
 import Register from "./Register";
 import PasswordChanger from "./PasswordChanger";
 import Registered from "./Registered";
+import Logs from "./Logs";
 
 const App = () => {
   return (
@@ -20,6 +21,7 @@ const App = () => {
                     <Route path="/register" element={<Register/>}/>
                     <Route path="/settings" element={<PasswordChanger/>}/>
                     <Route path="/registered" element={<Registered/>}/>
+                    <Route path="/logs" element={<Logs/>}/>
                 </Routes>
             </BrowserRouter>
             <Outlet/>

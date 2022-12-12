@@ -25,8 +25,13 @@ const login = (givenUsername, givenPassword) => {
     });
 };
 
+const logout = () => {
+    localStorage.setItem("token", "");
+}
+
 const AuthService = {
     register,
     login,
+    logout
 };
 export default AuthService;

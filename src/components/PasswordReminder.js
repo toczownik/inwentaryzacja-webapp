@@ -1,10 +1,11 @@
-import {Button, Form} from "react-bootstrap";
+import {Button, Container, Form} from "react-bootstrap";
 import {useState} from "react";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import UserService from "../services/user.service";
 
 
 function PasswordReminder() {
+    const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [message, setMessage] = useState("");
     const onFormSubmit = e => {
@@ -12,6 +13,8 @@ function PasswordReminder() {
         UserService.changePassword(email).then(
             (response => {
                 setMessage(response.data.message);
+                navigate("/settings");
+                window.location.reload();
             }),
             (error) => {
                 const resMessage =
@@ -27,7 +30,7 @@ function PasswordReminder() {
     }
 
     return (
-        <div className="PasswordReminder">
+        <Container>
             <h3>WYŚLIJ MAILA Z LINKIEM DO ZMIANY HASŁA</h3>
             <Form onSubmit={onFormSubmit}>
                 <Form.Group>
@@ -41,7 +44,7 @@ function PasswordReminder() {
                     Wróć
                 </Link>
             </Form>
-        </div>
+        </Container>
     );
 }
 

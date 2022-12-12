@@ -1,37 +1,48 @@
 import {Link, useNavigate} from "react-router-dom";
-import {Button, Form} from "react-bootstrap";
 import {useState} from "react";
 import AuthService from "../services/auth.service";
+import {Container, Button, Form} from "react-bootstrap";
 
 function Login() {
     let navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [message, setMessage] = useState("");
+    const [trials, setTrials] = useState(0);
+    const [prevMail, setPrevMail] = useState("");
     const onFormSubmit = e => {
         e.preventDefault();
         AuthService.login(email, password).then(
             (response) => {
                 localStorage.setItem('token', response.data.Authorization);
-                navigate("/settings");
+                navigate("/logs");
                 window.location.reload();
             },
             (error) => {
                 const resMessage = (error.response && error.response.data) || error.message || error.toString();
-                setMessage(resMessage);
-                console.log(message);
+                if (email === prevMail) {
+                    setTrials(trials + 1);
+                    if (trials >= 3) {
+                        setMessage("Konto jest tymczasowo zablokowane");
+                    } else {
+                        setMessage(resMessage);
+                    }
+                } else {
+                    setPrevMail(email);
+                    setTrials(1);
+                }
             }
         )
     }
     return (
-        <div className="Login">
+        <Container >
             <h3>WITAMY</h3>
             <Form onSubmit={onFormSubmit}>
-                <Form.Group>
+                <Form.Group controlId="formBasicEmail">
                     <Form.Label>Adres email</Form.Label>
                     <Form.Control type="email" placeholder="adres email" onChange={e => {setEmail(e.target.value);}}/>
                 </Form.Group>
-                <Form.Group>
+                <Form.Group controlId="formBasicPassword">
                     <Form.Label>Hasło</Form.Label>
                     <Form.Control type="password" placeholder="hasło" onChange={e => {setPassword(e.target.value);}}/>
                 </Form.Group>
@@ -46,7 +57,7 @@ function Login() {
                     Nie mam konta
                 </Link>
             </Form>
-        </div>
+        </Container>
     );
 }
 

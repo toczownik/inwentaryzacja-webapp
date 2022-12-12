@@ -1,10 +1,10 @@
-import './Login.css';
-import {Link} from "react-router-dom";
-import {Button, Form} from "react-bootstrap";
+import {Link, useNavigate} from "react-router-dom";
+import {Button, Container, Form} from "react-bootstrap";
 import {useState} from "react";
 import AuthService from "../services/auth.service";
 
 function Register() {
+    const navigate = useNavigate();
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
@@ -15,6 +15,8 @@ function Register() {
         AuthService.register(firstName, lastName, email, password).then(
             (response => {
                 setMessage(response.data.message);
+                navigate("/registered");
+                window.location.reload();
             }),
             (error) => {
                 const resMessage =
@@ -29,7 +31,7 @@ function Register() {
         console.log(message);
     }
     return (
-        <div className="Login">
+        <Container>
             <h3>FORMULARZ REJESTRACYJNY</h3>
             <Form onSubmit={onFormSubmit}>
                 <Form.Group>
@@ -48,14 +50,15 @@ function Register() {
                     <Form.Label>Hasło</Form.Label>
                     <Form.Control type="password" placeholder="hasło" onChange={e => {setPassword(e.target.value);}}/>
                 </Form.Group>
+                {message}
                 <Button variant="primary" type="submit">
-                    POTWIERDŹ
+                    ZAREJESTRUJ
                 </Button>
                 <Link to="/login">
                     Posiadam już konto
                 </Link>
             </Form>
-        </div>
+        </Container>
     );
 }
 
