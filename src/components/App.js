@@ -6,6 +6,7 @@ import Register from "./Register";
 import PasswordChanger from "./PasswordChanger";
 import Registered from "./Registered";
 import Logs from "./Logs";
+import ItemCreator from "./ItemCreator";
 
 const App = () => {
   return (
@@ -22,6 +23,7 @@ const App = () => {
                     <Route path="/settings" element={<PasswordChanger/>}/>
                     <Route path="/registered" element={<Registered/>}/>
                     <Route path="/logs" element={<Logs/>}/>
+                    <Route path="/item" element={<ItemCreator/>}/>
                 </Routes>
             </BrowserRouter>
             <Outlet/>

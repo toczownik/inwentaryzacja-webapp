@@ -27,6 +27,11 @@ function Logs() {
                 setMessage(resMessage);
             }
         )
+    };
+
+    const toItem = e => {
+        navigate("/item");
+        window.location.reload();
     }
 
     return (
@@ -38,6 +43,9 @@ function Logs() {
             </Button>
             <Button variant="primary" type="button" onClick={logout}>
                 WYLOGUJ
+            </Button>
+            <Button variant="primary" type="button" onClick={toItem}>
+                ELEMENT
             </Button>
             <Table striped>
                 <thead>
