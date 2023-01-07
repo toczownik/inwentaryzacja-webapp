@@ -34,6 +34,11 @@ function Logs() {
         window.location.reload();
     }
 
+    const toItems = e => {
+        navigate("/list");
+        window.location.reload();
+    }
+
     return (
         <Container>
             <h3>LOGI</h3>
@@ -46,6 +51,9 @@ function Logs() {
             </Button>
             <Button variant="primary" type="button" onClick={toItem}>
                 ELEMENT
+            </Button>
+            <Button variant="primary" type="button" onClick={toItems}>
+                LISTA
             </Button>
             <Table striped>
                 <thead>

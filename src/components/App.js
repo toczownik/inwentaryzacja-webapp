@@ -7,6 +7,8 @@ import PasswordChanger from "./PasswordChanger";
 import Registered from "./Registered";
 import Logs from "./Logs";
 import ItemCreator from "./ItemCreator";
+import ItemEditor from "./ItemEditor";
+import ItemList from "./ItemList";
 
 const App = () => {
   return (
@@ -24,6 +26,8 @@ const App = () => {
                     <Route path="/registered" element={<Registered/>}/>
                     <Route path="/logs" element={<Logs/>}/>
                     <Route path="/item" element={<ItemCreator/>}/>
+                    <Route path="/update" element={<ItemEditor/>}/>
+                    <Route path="/list" element={<ItemList/>}/>
                 </Routes>
             </BrowserRouter>
             <Outlet/>
