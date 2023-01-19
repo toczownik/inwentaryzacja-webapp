@@ -2,6 +2,8 @@ import {useEffect, useState} from "react";
 import {Button, Container, Form, FormControl, FormGroup, FormLabel, Table} from "react-bootstrap";
 import {useNavigate} from "react-router-dom";
 import ItemService from "../services/item.service";
+import Select from "react-select";
+import {SingleValue} from "react-select/animated";
 
 function ItemList() {
     const navigate = useNavigate();
@@ -11,6 +13,7 @@ function ItemList() {
     const [items, setItems] = useState([]);
     const [count, setCount] = useState(0);
     const [tableChanged, setTableChanged] = useState(true);
+    const [column, setColumn] = useState("name");
     const options = {year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric'};
 
     const categories = [
@@ -26,8 +29,14 @@ function ItemList() {
         {value: "inwentarz żywy", label: "LIVESTOCK"}
     ]
 
+    const columns = [
+        {label: "nazwa", value: "name"},
+        {label: "data zakupu", value: "purchaseDate"},
+        {label: "cena zakupu", value: "purchasePrice"}
+    ]
+
     const refresh = () => {
-      ItemService.getItemsPage(page, size).then(
+      ItemService.getItemsPage(page, size, column).then(
           (response) => {
               setMessage(response.data.message);
               setItems(Object.entries(response.data.itemList));
@@ -71,6 +80,17 @@ function ItemList() {
         setTableChanged(true);
     }
 
+    const toEdit = (e) => {
+        localStorage.setItem("itemID", e);
+        navigate("/update");
+        window.location.reload();
+    }
+
+    const changeColumn = (e) => {
+        setColumn(e.value);
+        setTableChanged(true);
+    }
+
     return(
         <Container>
             <h3>INWENTARZ</h3>
@@ -86,6 +106,16 @@ function ItemList() {
             {((count/size)-page > 1) && <Button variant="primary" type="button" onClick={nextPage}>
                 NASTĘPNA STRONA
             </Button>}
+            <br/>
+            <Form>
+                <Form.Group>
+                    <Form.Label>Kategoria</Form.Label>
+                    <Select options={columns} components={SingleValue} onChange={changeColumn}/>
+                </Form.Group>
+                <Button type="submit" variant="primary">
+                    SORTUJ
+                </Button>
+            </Form>
             <br/>
             <Form onSubmit={changeSize}>
                 <FormGroup>
@@ -132,6 +162,9 @@ function ItemList() {
                     <td>
                         Kod
                     </td>
+                    <td>
+
+                    </td>
                 </tr>
                 </thead>
                 <tbody>
@@ -166,6 +199,11 @@ function ItemList() {
                         </td>
                         <td>
                             {value.barCodeNumber}
+                        </td>
+                        <td>
+                            <Button type="button" onClick={() => toEdit(value.id)}>
+                                EDYCJA I SZCZEGÓŁY
+                            </Button>
                         </td>
                     </tr>
                 ))}

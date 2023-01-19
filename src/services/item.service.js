@@ -35,14 +35,25 @@ const getItem = (id) => {
     });
 }
 
-const updateItem = (id, name) => {
+const updateItem = (id, name, date, faxNumber, purchasePrice, amountOfAnnualDepreciation, currencyValue, description,
+                    location, classification, barCodeNumber) => {
     // let purchaseDate = null
     // if (date != null) {
     //     purchaseDate = new Date(date).toISOString();
     // }
     return axios.patch(API_URL + `update/${id}`,
         {
-            name
+            id,
+            name,
+            date,
+            faxNumber,
+            purchasePrice,
+            amountOfAnnualDepreciation,
+            currencyValue,
+            description,
+            location,
+            classification,
+            barCodeNumber
         }, {headers: {
                 Authorization: `Bearer${localStorage.getItem("token")}`,
                 'Access-Control-Allow-Origin': '*',
@@ -51,11 +62,12 @@ const updateItem = (id, name) => {
         });
 }
 
-const getItemsPage = (page, size) => {
+const getItemsPage = (page, size, sort) => {
     return axios.get(API_URL + "all", {
         params: {
             page,
             size,
+            sort
         },
         headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`
