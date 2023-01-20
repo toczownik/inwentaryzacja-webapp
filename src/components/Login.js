@@ -15,7 +15,7 @@ function Login() {
         AuthService.login(email, password).then(
             (response) => {
                 localStorage.setItem('token', response.data.Authorization);
-                navigate("/logs");
+                navigate("/list");
                 window.location.reload();
             },
             (error) => {
