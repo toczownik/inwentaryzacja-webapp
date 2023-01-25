@@ -1,9 +1,10 @@
 import {useEffect, useState} from "react";
-import {Button, Container, Form, FormControl, FormGroup, FormLabel, Table} from "react-bootstrap";
+import {Button, Container, Form, Table} from "react-bootstrap";
 import {useNavigate} from "react-router-dom";
 import ItemService from "../services/item.service";
 import Select from "react-select";
 import {SingleValue} from "react-select/animated";
+import './ItemList.css';
 
 function ItemList() {
     const navigate = useNavigate();
@@ -70,13 +71,8 @@ function ItemList() {
         }
     }
 
-    const toLogs = () => {
-        navigate("/logs");
-        window.location.reload();
-    }
-
     const changeSize = (e) => {
-        e.preventDefault();
+        setSize(e)
         setTableChanged(true);
     }
 
@@ -95,17 +91,8 @@ function ItemList() {
         <Container>
             <h3>INWENTARZ</h3>
             <Button variant="primary" type="button" onClick={refresh}>
-                ODŚWIEŹ
+                ODŚWIEŻ
             </Button>
-            <Button variant="primary" type="button" onClick={toLogs}>
-                POWRÓT
-            </Button>
-            {(page > 0) && <Button variant="primary" type="button" onClick={prevPage}>
-                POPRZEDNIA STRONA
-            </Button>}
-            {((count/size)-page > 1) && <Button variant="primary" type="button" onClick={nextPage}>
-                NASTĘPNA STRONA
-            </Button>}
             <br/>
             <Form>
                 <Form.Group>
@@ -116,16 +103,19 @@ function ItemList() {
                     SORTUJ
                 </Button>
             </Form>
-            <br/>
-            <Form onSubmit={changeSize}>
-                <FormGroup>
-                    <FormLabel>liczba przedmiotów na jednej stronie</FormLabel>
-                    <FormControl type="number" onChange={e => {setSize(e.target.value);}}/>
-                </FormGroup>
-                <Button type="submit" variant="primary">
-                    POTWIERDŹ
+            <Container>
+                <h5>Liczba elementów na stronie</h5>
+                <Button type="button" variant="primary" onClick={() => {changeSize(2)}}>
+                    2
                 </Button>
-            </Form>
+                <Button type="button" variant="primary" onClick={() => {changeSize(5)}}>
+                    5
+                </Button>
+                <Button type="button" variant="primary" onClick={() => {changeSize(10)}}>
+                    10
+                </Button>
+            </Container>
+            <br/>
             <br/>
             strona: {page + 1}
             <br/>
@@ -151,7 +141,7 @@ function ItemList() {
                         Deprecjacja
                     </td>
                     <td>
-                        Wartość waluty
+                        Wartość
                     </td>
                     <td>
                         Opis
@@ -209,7 +199,14 @@ function ItemList() {
                 ))}
                 </tbody>
             </Table>
-            {message}
+            <Container className="navigation">
+                {(page > 0) && <Button variant="primary" type="button" onClick={prevPage}>
+                    POPRZEDNIA STRONA
+                </Button>}
+                {((count/size)-page > 1) && <Button variant="primary" type="button" onClick={nextPage}>
+                    NASTĘPNA STRONA
+                </Button>}
+            </Container>
         </Container>
     )
 }

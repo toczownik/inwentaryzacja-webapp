@@ -41,7 +41,7 @@ function Logs() {
 
     return (
         <Container>
-            <h3>LOGI</h3>
+            <h3>PRÓBY LOGOWANIA</h3>
             {message}
             <Button variant="primary" type="button" onClick={refresh}>
                 ODŚWIEŻ

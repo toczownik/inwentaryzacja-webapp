@@ -12,9 +12,14 @@ import ItemList from "./ItemList";
 import {Container, Nav, Navbar, NavbarBrand, NavLink} from "react-bootstrap";
 import NavbarToggle from "react-bootstrap/NavbarToggle";
 import NavbarCollapse from "react-bootstrap/NavbarCollapse";
+import AuthService from "../services/auth.service";
 
 const App = () => {
-  return (
+    const logout = e => {
+        AuthService.logout();
+        window.location.reload();
+    }
+    return (
         <div className="App">
             <Navbar>
                 <Container>
@@ -31,7 +36,10 @@ const App = () => {
                                 zmień hasło
                             </NavLink>
                             <NavLink href="/logs">
-                                Historia prób zalogowania
+                                historia prób zalogowania
+                            </NavLink>
+                            <NavLink onClick={logout} href="/login">
+                                Wyloguj
                             </NavLink>
                         </Nav>
                     </NavbarCollapse>
