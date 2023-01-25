@@ -2,6 +2,7 @@ import {Link, useNavigate} from "react-router-dom";
 import {useState} from "react";
 import AuthService from "../services/auth.service";
 import {Container, Button, Form} from "react-bootstrap";
+import './Login.css';
 
 function Login() {
     let navigate = useNavigate();
@@ -36,8 +37,8 @@ function Login() {
     }
     return (
         <Container >
-            <h3>WITAMY</h3>
-            <Form onSubmit={onFormSubmit}>
+            <h3 className="title">WITAMY</h3>
+            <Form className="login-form" onSubmit={onFormSubmit}>
                 <Form.Group controlId="formBasicEmail">
                     <Form.Label>Adres email</Form.Label>
                     <Form.Control type="email" placeholder="adres email" onChange={e => {setEmail(e.target.value);}}/>
@@ -47,15 +48,21 @@ function Login() {
                     <Form.Control type="password" placeholder="hasło" onChange={e => {setPassword(e.target.value);}}/>
                 </Form.Group>
                 <Form.Label>{message}</Form.Label>
-                <Button variant="primary" type="submit">
-                    POTWIERDŹ
-                </Button>
-                <Link to="/reminder">
-                    Nie pamiętam hasła
-                </Link>
-                <Link to="/register">
-                    Nie mam konta
-                </Link>
+                <Container>
+                    <Button variant="primary" type="submit">
+                        ZALOGUJ
+                    </Button>
+                </Container>
+                <Container>
+                    <Link to="/reminder" >
+                        Nie pamiętam hasła
+                    </Link>
+                </Container>
+                <Container>
+                    <Link to="/register">
+                        Nie mam konta
+                    </Link>
+                </Container>
             </Form>
         </Container>
     );
