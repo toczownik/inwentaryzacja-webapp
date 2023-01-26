@@ -73,6 +73,7 @@ function ItemList() {
 
     const changeSize = (e) => {
         setSize(e)
+        console.log(e)
         setTableChanged(true);
     }
 
@@ -83,26 +84,14 @@ function ItemList() {
     }
 
     const changeColumn = (e) => {
-        setColumn(e.value);
+        setColumn(e);
         setTableChanged(true);
     }
 
     return(
         <Container>
             <h3>INWENTARZ</h3>
-            <Button variant="primary" type="button" onClick={refresh}>
-                ODŚWIEŻ
-            </Button>
             <br/>
-            <Form>
-                <Form.Group>
-                    <Form.Label>Kategoria</Form.Label>
-                    <Select options={columns} components={SingleValue} onChange={changeColumn}/>
-                </Form.Group>
-                <Button type="submit" variant="primary">
-                    SORTUJ
-                </Button>
-            </Form>
             <Container>
                 <h5>Liczba elementów na stronie</h5>
                 <Button type="button" variant="primary" onClick={() => {changeSize(2)}}>
@@ -123,25 +112,37 @@ function ItemList() {
                 <thead>
                 <tr>
                     <td>
-                        ID
+                        <Button className={"sortingButton"} type={"button"} onClick={() => {changeColumn("id")}}>
+                            ID
+                        </Button>
                     </td>
                     <td>
-                        Nazwa
+                        <Button className={"sortingButton"} type={"button"} onClick={() => {changeColumn("name")}}>
+                            Nazwa
+                        </Button>
                     </td>
                     <td>
-                        Data zakupu
+                        <Button className={"sortingButton"} type={"button"} onClick={() => {changeColumn("purchaseDate")}}>
+                            Data zakupu
+                        </Button>
                     </td>
                     <td>
                         Faks
                     </td>
                     <td>
-                        Cena
+                        <Button className={"sortingButton"} type={"button"} onClick={() => {changeColumn("purchasePrice")}}>
+                            Cena
+                        </Button>
                     </td>
                     <td>
-                        Deprecjacja
+                        <Button className={"sortingButton"} type={"button"} onClick={() => {changeColumn("amountOfAnnualDepreciation")}}>
+                            Deprecjacja
+                        </Button>
                     </td>
                     <td>
-                        Wartość
+                        <Button className={"sortingButton"} type={"button"} onClick={() => {changeColumn("currencyValue")}}>
+                            Wartość
+                        </Button>
                     </td>
                     <td>
                         Opis
@@ -150,7 +151,9 @@ function ItemList() {
                         Kategoria
                     </td>
                     <td>
-                        Kod
+                        <Button className={"sortingButton"} type={"button"} onClick={() => {changeColumn("barCodeNumber")}}>
+                            Kod
+                        </Button>
                     </td>
                     <td>
 
