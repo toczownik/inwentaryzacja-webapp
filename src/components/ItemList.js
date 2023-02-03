@@ -1,9 +1,7 @@
 import {useEffect, useState} from "react";
-import {Button, Container, Form, Table} from "react-bootstrap";
+import {Button, Container, Table} from "react-bootstrap";
 import {useNavigate} from "react-router-dom";
 import ItemService from "../services/item.service";
-import Select from "react-select";
-import {SingleValue} from "react-select/animated";
 import './ItemList.css';
 
 function ItemList() {
@@ -28,12 +26,6 @@ function ItemList() {
         {value: "środki transportu", label: "TRANSPORT"},
         {value: "narzędzia, przyrządy, ruchomości i wyposażenie, gdzie indziej niesklasyfikowane", label: "ANOTHER"},
         {value: "inwentarz żywy", label: "LIVESTOCK"}
-    ]
-
-    const columns = [
-        {label: "nazwa", value: "name"},
-        {label: "data zakupu", value: "purchaseDate"},
-        {label: "cena zakupu", value: "purchasePrice"}
     ]
 
     const refresh = () => {
@@ -112,46 +104,56 @@ function ItemList() {
                 <thead>
                 <tr>
                     <td>
-                        <Button className={"sortingButton"} type={"button"} onClick={() => {changeColumn("id")}}>
+                        <Button className={"sortingButton"} type={"button"} onClick={() => {changeColumn("id")}}
+                                style={{backgroundColor: (column==="id") ? "red" : "blue"}}>
                             ID
                         </Button>
                     </td>
                     <td>
-                        <Button className={"sortingButton"} type={"button"} onClick={() => {changeColumn("name")}}>
+                        <Button className={"sortingButton"} type={"button"} onClick={() => {changeColumn("name")}}
+                                style={{backgroundColor: (column==="name") ? "red" : "blue"}}>
                             Nazwa
                         </Button>
                     </td>
                     <td>
-                        <Button className={"sortingButton"} type={"button"} onClick={() => {changeColumn("purchaseDate")}}>
+                        <Button className={"sortingButton"} type={"button"} onClick={() => {changeColumn("purchaseDate")}}
+                                style={{backgroundColor: (column==="purchaseDate") ? "red" : "blue"}}>
                             Data zakupu
                         </Button>
                     </td>
                     <td>
-                        Faks
-                    </td>
-                    <td>
-                        <Button className={"sortingButton"} type={"button"} onClick={() => {changeColumn("purchasePrice")}}>
+                        <Button className={"sortingButton"} type={"button"} onClick={() => {changeColumn("purchasePrice")}}
+                                style={{backgroundColor: (column==="purchasePrice") ? "red" : "blue"}}>
                             Cena
                         </Button>
                     </td>
                     <td>
-                        <Button className={"sortingButton"} type={"button"} onClick={() => {changeColumn("amountOfAnnualDepreciation")}}>
+                        <Button className={"sortingButton"} type={"button"} onClick={() => {changeColumn("amountOfAnnualDepreciation")}}
+                                style={{backgroundColor: (column==="amountOfAnnualDepreciation") ? "red" : "blue"}}>
                             Deprecjacja
                         </Button>
                     </td>
                     <td>
-                        <Button className={"sortingButton"} type={"button"} onClick={() => {changeColumn("currencyValue")}}>
+                        <Button className={"sortingButton"} type={"button"} onClick={() => {changeColumn("currencyValue")}}
+                                style={{backgroundColor: (column==="currencyValue") ? "red" : "blue"}}>
                             Wartość
                         </Button>
                     </td>
                     <td>
-                        Opis
+                        <Button className={"sortingButton"} type={"button"} onClick={() => {changeColumn("description")}}
+                                style={{backgroundColor: (column==="description") ? "red" : "blue"}}>
+                            Opis
+                        </Button>
                     </td>
                     <td>
-                        Kategoria
+                        <Button className={"sortingButton"} type={"button"} onClick={() => {changeColumn("classification")}}
+                                style={{backgroundColor: (column==="classification") ? "red" : "blue"}}>
+                            Kategoria
+                        </Button>
                     </td>
                     <td>
-                        <Button className={"sortingButton"} type={"button"} onClick={() => {changeColumn("barCodeNumber")}}>
+                        <Button className={"sortingButton"} type={"button"} onClick={() => {changeColumn("barCodeNumber")}}
+                                style={{backgroundColor: (column==="barCodeNumber") ? "red" : "blue"}}>
                             Kod
                         </Button>
                     </td>
@@ -171,9 +173,6 @@ function ItemList() {
                         </td>
                         <td>
                             {new Date(value.purchaseDate).toLocaleDateString([], options)}
-                        </td>
-                        <td>
-                            {value.faxNumber}
                         </td>
                         <td>
                             {value.purchasePrice}
