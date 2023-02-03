@@ -7,7 +7,6 @@ import {SingleValue} from "react-select/animated";
 import Barcode from "react-barcode";
 
 function ItemCreator() {
-    let navigate = useNavigate();
     const [message, setMessage] = useState("");
     const [name, setName] = useState("");
     const [purchaseDate, setPurchaseDate] = useState(new Date());
@@ -43,12 +42,6 @@ function ItemCreator() {
     }
 
     useEffect(isUpdated);
-
-    const toLogs = e => {
-        e.preventDefault();
-        navigate("/logs");
-        window.location.reload();
-    };
 
     const refresh = () => {
         ItemService.getItem(localStorage.getItem("itemID")).then(
@@ -96,9 +89,6 @@ function ItemCreator() {
     return (
         <Container>
             <h3>EDYTUJ PRZEDMIOT</h3>
-            <Button variant="primary" type="button" onClick={toLogs}>
-                LOGI
-            </Button>
             <Table striped>
                 <thead>
                 <tr>
@@ -186,39 +176,35 @@ function ItemCreator() {
             <Form onSubmit={onFormSubmit}>
                 <Form.Group controlId="text">
                     <Form.Label>Nazwa</Form.Label>
-                    <Form.Control type="text" onChange={e => {setName(e.target.value);}}/>
+                    <Form.Control type="text" onChange={e => {setName(e.target.value);}} defaultValue={name}/>
                 </Form.Group>
                 <Form.Group controlId="date">
                     <Form.Label>Data zakupu</Form.Label>
                     <Form.Control type="date" onChange={e => {setPurchaseDate(e.target.value);}}/>
                 </Form.Group>
-                <Form.Group controlId="fax">
-                    <Form.Label>Faks</Form.Label>
-                    <Form.Control type="text" onChange={e => {setFaxNumber(e.target.value);}}/>
-                </Form.Group>
                 <Form.Group controlId="number">
                     <Form.Label>Cena zakupu</Form.Label>
-                    <Form.Control type="number" onChange={e => {setPrice(e.target.value);}}/>
+                    <Form.Control type="number" onChange={e => {setPrice(e.target.value);}} value={price}/>
                 </Form.Group>
                 <Form.Group controlId="number">
                     <Form.Label>Deprecjacja</Form.Label>
-                    <Form.Control type="number" onChange={e => {setDepreciation(e.target.value);}}/>
+                    <Form.Control type="number" onChange={e => {setDepreciation(e.target.value);}} value={depreciation}/>
                 </Form.Group>
                 <Form.Group controlId="number">
-                    <Form.Label>Wartość waluty</Form.Label>
-                    <Form.Control type="number" onChange={e => {setCurrencyValue(e.target.value);}}/>
+                    <Form.Label>Wartość</Form.Label>
+                    <Form.Control type="number" onChange={e => {setCurrencyValue(e.target.value);}} value={currencyValue}/>
                 </Form.Group>
                 <Form.Group controlId="text">
                     <Form.Label>Opis</Form.Label>
-                    <Form.Control type="text" onChange={e => {setDescription(e.target.value);}}/>
+                    <Form.Control type="text" onChange={e => {setDescription(e.target.value);}} value={description}/>
                 </Form.Group>
                 <Form.Group controlId="text">
                     <Form.Label>Lokalizacja</Form.Label>
-                    <Form.Control type="text" onChange={e => {setLoc(e.target.value);}}/>
+                    <Form.Control type="text" onChange={e => {setLoc(e.target.value);}} defaultValue={loc}/>
                 </Form.Group>
                 <Form.Group>
                     <Form.Label>Kategoria</Form.Label>
-                    <Select options={categories} components={SingleValue} onChange={changeCategory}/>
+                    <Select options={categories} components={SingleValue} onChange={changeCategory} value={category}/>
                 </Form.Group>
                 <Button variant="primary" type="submit">
                     EDYTUJ
