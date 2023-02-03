@@ -4,7 +4,7 @@ import {useEffect, useState} from "react";
 import ItemService from "../services/item.service";
 import Select from "react-select";
 import {SingleValue} from "react-select/animated";
-import {QRCodeCanvas} from 'qrcode.react';
+import Barcode from "react-barcode";
 
 function ItemCreator() {
     let navigate = useNavigate();
@@ -181,7 +181,7 @@ function ItemCreator() {
             </Table>
             <br/>
             <Container>
-                <QRCodeCanvas value={barCode}/>
+                <Barcode value={barCode}/>
             </Container>
             <Form onSubmit={onFormSubmit}>
                 <Form.Group controlId="text">
