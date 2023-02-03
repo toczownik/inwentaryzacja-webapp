@@ -13,6 +13,7 @@ import {Container, Nav, Navbar, NavbarBrand, NavLink} from "react-bootstrap";
 import NavbarToggle from "react-bootstrap/NavbarToggle";
 import NavbarCollapse from "react-bootstrap/NavbarCollapse";
 import AuthService from "../services/auth.service";
+import Inventory from "./Inventory";
 
 const App = () => {
     const logout = e => {
@@ -32,6 +33,9 @@ const App = () => {
                             <NavLink href="/list">
                                 lista przedmiotów
                             </NavLink>
+                            <NavLink href="/inventory">
+                                inwentaryzacja
+                            </NavLink>
                             <NavLink href="/settings">
                                 zmień hasło
                             </NavLink>
@@ -39,7 +43,7 @@ const App = () => {
                                 historia prób zalogowania
                             </NavLink>
                             <NavLink onClick={logout} href="/login">
-                                Wyloguj
+                                wyloguj
                             </NavLink>
                         </Nav>
                     </NavbarCollapse>
@@ -57,6 +61,7 @@ const App = () => {
                     <Route path="/item" element={<ItemCreator/>}/>
                     <Route path="/update" element={<ItemEditor/>}/>
                     <Route path="/list" element={<ItemList/>}/>
+                    <Route path="/inventory" element={<Inventory/>}/>
                 </Routes>
             </BrowserRouter>
             <Outlet/>
