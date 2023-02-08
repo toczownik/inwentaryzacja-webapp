@@ -73,7 +73,7 @@ function Logs() {
                                 {new Date(value.whenAttempt).toLocaleDateString([], options)}
                             </td>
                             <td>
-                                {value.isSuccessful.toString()}
+                                {value.isSuccessful ? "sukces" : "próba odrzucona"}
                             </td>
                         </tr>
                     ))}

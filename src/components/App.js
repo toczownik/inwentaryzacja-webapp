@@ -14,6 +14,7 @@ import NavbarToggle from "react-bootstrap/NavbarToggle";
 import NavbarCollapse from "react-bootstrap/NavbarCollapse";
 import AuthService from "../services/auth.service";
 import Inventory from "./Inventory";
+import "./style.css"
 
 const App = () => {
     const logout = e => {

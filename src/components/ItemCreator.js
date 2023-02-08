@@ -33,26 +33,6 @@ function ItemCreator() {
         {label: "inwentarz żywy", value: "LIVESTOCK"}
     ]
 
-    const onFormSubmit = e => {
-        e.preventDefault();
-        ItemService.getItem(id).then(
-            (response) => {
-                setElement(response.data);
-                setMessage(response.data.message);
-            },
-            (error) => {
-                const resMessage = (error.response && error.response.data) || error.message || error.toString();
-                setMessage(resMessage);
-            }
-        )
-    };
-
-    const toLogs = e => {
-        e.preventDefault();
-        navigate("/logs");
-        window.location.reload();
-    };
-
     const addItem = e => {
         e.preventDefault();
         ItemService.addItem(name, purchaseDate, faxNumber, price, depreciation, currencyValue, description, loc,
@@ -60,6 +40,8 @@ function ItemCreator() {
             (response) => {
                 setElement(response.data);
                 setMessage(response.data.message);
+                navigate("/list");
+                window.location.reload();
             },
             (error) => {
                 const resMessage = (error.response && error.response.data) || error.message || error.toString();
@@ -74,18 +56,9 @@ function ItemCreator() {
 
     return (
         <Container>
-            <h3>ZOBACZ PRZEDMIOT</h3>
-            <Button variant="primary" type="button" onClick={toLogs}>
-                LOGI
-            </Button>
-            <Form onSubmit={onFormSubmit}>
-                <Form.Group controlId="number">
-                    <Form.Label>Nazwa</Form.Label>
-                    <Form.Control type="number" placeholder="id" onChange={e => {setId(e.target.value);}}/>
-                </Form.Group>
-            </Form>
-            {element.name}
-            <br/>
+            <h2>
+                DODAJ PRZEDMIOT
+            </h2>
             <Form onSubmit={addItem}>
                 <Form.Group controlId="text">
                     <Form.Label>Nazwa</Form.Label>
@@ -95,10 +68,6 @@ function ItemCreator() {
                     <Form.Label>Data zakupu</Form.Label>
                     <Form.Control type="date" placeholder="purchase date" onChange={e => {setPurchaseDate(e.target.value);}}/>
                 </Form.Group>
-                <Form.Group controlId="fax">
-                    <Form.Label>Faks</Form.Label>
-                    <Form.Control type="text" placeholder="faks" onChange={e => {setFaxNumber(e.target.value);}}/>
-                </Form.Group>
                 <Form.Group controlId="number">
                     <Form.Label>Cena zakupu</Form.Label>
                     <Form.Control type="number" placeholder="cena" onChange={e => {setPrice(e.target.value);}}/>
@@ -106,10 +75,6 @@ function ItemCreator() {
                 <Form.Group controlId="number">
                     <Form.Label>Deprecjacja</Form.Label>
                     <Form.Control type="number" placeholder="deprecjacja" onChange={e => {setDepreciation(e.target.value);}}/>
-                </Form.Group>
-                <Form.Group controlId="number">
-                    <Form.Label>Wartość waluty</Form.Label>
-                    <Form.Control type="number" placeholder="wartość waluty" onChange={e => {setCurrencyValue(e.target.value);}}/>
                 </Form.Group>
                 <Form.Group controlId="text">
                     <Form.Label>Opis</Form.Label>
@@ -123,6 +88,7 @@ function ItemCreator() {
                     <Form.Label>Kategoria</Form.Label>
                     <Select options={categories} components={SingleValue} onChange={changeCategory}/>
                 </Form.Group>
+                <br/>
                 <Button variant="primary" type="submit">
                     DODAJ
                 </Button>

@@ -80,19 +80,30 @@ function ItemList() {
         setTableChanged(true);
     }
 
+    const toCreator = () => {
+        navigate("/item");
+        window.location.reload();
+    }
+
     return(
         <Container>
             <h3>INWENTARZ</h3>
             <br/>
             <Container>
+                <Button type={"button"} variant={"primary"} onClick={() => toCreator()}>
+                    DODAJ NOWY PRZEDMIOT
+                </Button>
+            </Container>
+            <br/>
+            <Container>
                 <h5>Liczba elementów na stronie</h5>
-                <Button type="button" variant="primary" onClick={() => {changeSize(2)}}>
+                <Button type="button" variant="primary" onClick={() => {changeSize(2)}} style={{margin: 10}}>
                     2
                 </Button>
-                <Button type="button" variant="primary" onClick={() => {changeSize(5)}}>
+                <Button type="button" variant="primary" onClick={() => {changeSize(5)}} style={{margin: 10}}>
                     5
                 </Button>
-                <Button type="button" variant="primary" onClick={() => {changeSize(10)}}>
+                <Button type="button" variant="primary" onClick={() => {changeSize(10)}} style={{margin: 10}}>
                     10
                 </Button>
             </Container>

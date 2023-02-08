@@ -14,8 +14,17 @@ const getInventory = (page, size) => {
     })
 }
 
+const checkItem = (item) => {
+    return axios.post(API_URL, item, {
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`
+        }
+    })
+}
+
 const InventoryService = {
-    getInventory
+    getInventory,
+    checkItem
 }
 
 export default InventoryService;
